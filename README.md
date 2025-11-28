@@ -1,8 +1,4 @@
-Here is a clean, industry-standard `README.md` for your component. It documents the installation, data structure (strictly matching your code), and usage.
 
-You can drop this file right into your project folder.
-
------
 
 # Nested Drawer Navigation
 
