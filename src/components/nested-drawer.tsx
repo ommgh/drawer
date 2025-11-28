@@ -1,21 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Drawer } from "vaul";
-import {
-  ChevronRight,
-  ChevronLeft,
-  Code,
-  Cloud,
-  Users,
-  Zap,
-  Shield,
-  BarChart3,
-  Settings,
-  Wrench,
-  Database,
-  TrendingUp,
-  PieChart,
-} from "lucide-react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
 interface MenuItem {
   id: string;
