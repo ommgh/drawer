@@ -20,6 +20,7 @@ Ensure you have the following shadcn/ui components installed:
 
 ```bash
 bunx shadcn@latest add button
+```
 
 ```bash
 bun install vaul
