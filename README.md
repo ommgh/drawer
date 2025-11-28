@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Here is a clean, industry-standard `README.md` for your component. It documents the installation, data structure (strictly matching your code), and usage.
 
-## Getting Started
+You can drop this file right into your project folder.
 
-First, run the development server:
+-----
+
+# Nested Drawer Navigation
+
+A high-performance, accessible, and animated drawer component featuring iOS-style nested navigation, auto-height adjustment, and "depth" transitions. Built with **React**, **Framer Motion**, and **Vaul**.
+
+##  Features
+
+  * **Recursive Nesting:** Supports infinite levels of sub-menus.
+  * **Auto-Height:** The drawer smoothly resizes based on the content of the active menu.
+  * **Depth Transitions:** Uses scale and blur effects for a premium "drill-down" feel.
+  * **Keyboard Accessible:** Full focus management and keyboard navigation support.
+  * **Mobile Optimized:** Touch gestures and responsive layout.
+
+##  Installation
+
+### 1\. Prerequisites
+
+Ensure you have the following shadcn/ui components installed:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bunx shadcn@latest add button
+
+```bash
+bun install vaul
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2\. Install Dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Install the required animation:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+bun install framer-motion
+```
 
-## Learn More
+## 📦 Data Structure
 
-To learn more about Next.js, take a look at the following resources:
+The component relies on a recursive data structure. You must strictly follow this TypeScript interface:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```typescript
+// The individual menu item
+interface MenuItem {
+  id: string;
+  title: string;           // Display text
+  description?: string;    // Optional subtitle/helper text
+  icon?: React.ReactNode;  // Lucide icon component
+  items?: MenuItem[];      // Recursive array for sub-menus
+}
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+// The root object passed to the component
+interface MenuData {
+  title: string;           // Title of the root menu (e.g., "Main Menu")
+  items: MenuItem[];
+}
+```
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Here is a complete example of how to implement the drawer in your page or layout.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```tsx
+"use client";
+
+import { NestedDrawer } from "@/components/nested-drawer";
+import { Home, Settings, User } from "lucide-react";
+
+const data = {
+  title: "Main Menu",
+  items: [
+    {
+      id: "home",
+      title: "Home",
+      description: "Go back to dashboard",
+      icon: <Home size={20} />,
+    },
+    {
+      id: "settings",
+      title: "Settings",
+      description: "Account preferences",
+      icon: <Settings size={20} />,
+      items: [
+         // Nested Item
+        {
+          id: "profile",
+          title: "Profile",
+          icon: <User size={20} />,
+        }
+      ]
+    }
+  ]
+};
+
+export default function Page() {
+  return (
+    <div className="flex justify-center items-center h-screen">
+       {/* Pass the data object to the component */}
+       <NestedDrawer menuData={data} />
+    </div>
+  );
+}
+```
+
+## ⚙️ Component API
+
+| Prop | Type | Description |
+| :--- | :--- | :--- |
+| `menuData` | `MenuData` | **Required.** The root object containing the menu tree. |
+| `open` | `boolean` | (Optional) Control the open state externally. |
+| `onOpenChange` | `(open: boolean) => void` | (Optional) Callback when state changes. |
+
+## 🎨 Customization
+
+### Adjusting Animation Speed
+
+To change the speed of the "depth" transition, navigate to the `motion.div` inside the component and modify the `transition` prop:
+
+```tsx
+// Faster (Snappy)
+transition={{ duration: 0.2, ease: "easeInOut" }}
+
+// Slower (Cinematic/iOS feel)
+transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
+```
+
+### Adjusting Height Animation
+
+If you want the drawer to resize faster or slower, find the wrapper `motion.div` (handling height) and adjust the spring physics:
+
+```tsx
+// Bouncy/Springy
+transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+
+// Stiff/Solid
+transition={{ type: "spring", bounce: 0, duration: 0.3 }}
+```
