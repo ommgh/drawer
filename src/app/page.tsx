@@ -11,8 +11,16 @@ import {
   Wrench,
   Database,
   TrendingUp,
-  PieChart,
   Home,
+  Layers,
+  Repeat,
+  Cpu,
+  MessageSquare,
+  FileCheck,
+  Lock,
+  Smartphone,
+  Server,
+  Globe,
 } from "lucide-react";
 import { NestedDrawer } from "@/components/nested-drawer";
 
@@ -30,97 +38,188 @@ interface MenuData {
 }
 
 const sampleMenuData: MenuData = {
-  title: "Services",
+  title: "Main Menu",
   items: [
     {
       id: "home",
       title: "Home",
-      description: "Scalable cloud solutions and infrastructure",
+      description: "Return to the dashboard overview",
       icon: <Home size={20} />,
     },
+    // SECTION 1: ENGINEERING (Deep Nesting)
     {
-      id: "software",
-      title: "Software Solutions",
-      description: "Custom software development and deployment",
+      id: "engineering",
+      title: "Software Engineering",
+      description: "End-to-end development services",
       icon: <Code size={20} />,
       items: [
         {
-          id: "web",
+          id: "web-dev",
           title: "Web Development",
-          description: "Modern web applications",
-          icon: <Code size={20} />,
+          description: "Scalable web applications",
+          icon: <Globe size={20} />,
           items: [
             {
-              id: "mobile",
-              title: "Mobile Development",
-              description: "iOS and Android apps",
-              icon: <Code size={20} />,
+              id: "frontend",
+              title: "Frontend Architecture",
+              description: "React, Next.js & Vue solutions",
+              icon: <Layers size={20} />,
+            },
+            {
+              id: "backend",
+              title: "Backend Systems",
+              description: "Node.js, Go, and Python APIs",
+              icon: <Server size={20} />,
             },
           ],
         },
         {
-          id: "mobile",
+          id: "mobile-dev",
           title: "Mobile Development",
-          description: "iOS and Android apps",
-          icon: <Code size={20} />,
+          description: "Native and cross-platform apps",
+          icon: <Smartphone size={20} />,
+          items: [
+            {
+              id: "ios-android",
+              title: "Native (iOS/Android)",
+              description: "Swift & Kotlin development",
+              icon: <Code size={20} />,
+            },
+            {
+              id: "flutter-rn",
+              title: "Cross-Platform",
+              description: "Flutter & React Native",
+              icon: <Repeat size={20} />,
+            },
+          ],
         },
       ],
     },
-
+    // SECTION 2: CLOUD (Deep Nesting)
     {
-      id: "consulting",
-      title: "Consulting Services",
-      description: "Expert guidance and strategic support",
-      icon: <Users size={20} />,
+      id: "cloud-infra",
+      title: "Cloud & DevOps",
+      description: "Infrastructure as code and automation",
+      icon: <Cloud size={20} />,
+      items: [
+        {
+          id: "cloud-migration",
+          title: "Cloud Migration",
+          description: "Move legacy systems to the cloud",
+          icon: <Zap size={20} />,
+          items: [
+            {
+              id: "aws-azure",
+              title: "AWS & Azure Setup",
+              description: "Enterprise environment setup",
+              icon: <Cloud size={20} />,
+            },
+          ],
+        },
+        {
+          id: "devops-auto",
+          title: "DevOps Automation",
+          description: "CI/CD pipelines and containerization",
+          icon: <Settings size={20} />,
+          items: [
+            {
+              id: "cicd",
+              title: "CI/CD Pipelines",
+              description: "Automated testing and deployment",
+              icon: <Repeat size={20} />,
+            },
+            {
+              id: "kubernetes",
+              title: "Kubernetes Management",
+              description: "Container orchestration",
+              icon: <Layers size={20} />,
+            },
+          ],
+        },
+      ],
     },
+    // SECTION 3: DATA (Deep Nesting)
     {
-      id: "digital",
-      title: "Digital Transformation",
-      description: "Comprehensive digital transformation strategies",
-      icon: <Zap size={20} />,
-    },
-    {
-      id: "cybersecurity",
-      title: "Cybersecurity Consulting",
-      description: "Comprehensive cybersecurity services and solutions",
-      icon: <Shield size={20} />,
-    },
-    {
-      id: "data",
-      title: "Data & Analytics Consulting",
-      description: "Data strategy, analytics, and business intelligence",
+      id: "data-ai",
+      title: "Data & AI",
+      description: "Turn data into actionable insights",
       icon: <BarChart3 size={20} />,
       items: [
         {
-          id: "data-strategy",
-          title: "Data Strategy",
-          description: "Data governance and strategy development",
+          id: "data-engineering",
+          title: "Data Engineering",
+          description: "Pipelines and warehousing",
           icon: <Database size={20} />,
+          items: [
+            {
+              id: "etl",
+              title: "ETL Pipelines",
+              description: "High-volume data processing",
+              icon: <Repeat size={20} />,
+            },
+          ],
         },
         {
-          id: "advanced-analytics",
-          title: "Advanced Analytics",
-          description: "Machine learning and predictive analytics",
-          icon: <TrendingUp size={20} />,
+          id: "advanced-ai",
+          title: "Artificial Intelligence",
+          description: "ML models and generative AI",
+          icon: <Cpu size={20} />,
+          items: [
+            {
+              id: "nlp",
+              title: "NLP Solutions",
+              description: "Chatbots and text analysis",
+              icon: <MessageSquare size={20} />,
+            },
+            {
+              id: "predictive",
+              title: "Predictive Analytics",
+              description: "Forecasting market trends",
+              icon: <TrendingUp size={20} />,
+            },
+          ],
         },
+      ],
+    },
+    // SECTION 4: SECURITY (Deep Nesting)
+    {
+      id: "cybersecurity",
+      title: "Cybersecurity",
+      description: "Protecting digital assets",
+      icon: <Shield size={20} />,
+      items: [
         {
-          id: "business-intelligence",
-          title: "Business Intelligence",
-          description: "BI platform implementation and optimization",
-          icon: <PieChart size={20} />,
+          id: "security-audit",
+          title: "Security Audits",
+          description: "Vulnerability assessments",
+          icon: <FileCheck size={20} />,
+          items: [
+            {
+              id: "pentest",
+              title: "Penetration Testing",
+              description: "Ethical hacking simulations",
+              icon: <Lock size={20} />,
+            },
+            {
+              id: "compliance",
+              title: "Compliance (SOC2/ISO)",
+              description: "Regulatory adherence",
+              icon: <Shield size={20} />,
+            },
+          ],
         },
       ],
     },
     {
-      id: "devops",
-      title: "DevOps & Platform Engineering",
-      description: "DevOps transformation and platform engineering",
-      icon: <Settings size={20} />,
+      id: "consulting",
+      title: "Strategic Consulting",
+      description: "Expert guidance for C-Suite",
+      icon: <Users size={20} />,
     },
     {
       id: "support",
-      title: "Support & Maintenance",
-      description: "Ongoing maintenance and support services",
+      title: "24/7 Support",
+      description: "Maintenance and SLA guarantees",
       icon: <Wrench size={20} />,
     },
   ],
